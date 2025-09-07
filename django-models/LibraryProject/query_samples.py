@@ -1,21 +1,15 @@
-import django
 import os
+import django
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django-models.settings")
+# Set the correct settings module
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "LibraryProject.settings")
 django.setup()
 
 from relationship_app.models import Author, Book, Library, Librarian
+# 1. Query all books  in the database.
+def query_all_books():
+    books = Book.objects.all()
+    for book in books:
+        print(f"Book Title: {book.title}, Author: {book.author.name}")
 
-# 1. Query all books by a specific author
-author = Author.objects.get(name="J.K. Rowling")
-books_by_author = author.books.all()
-print(f"Books by {author.name}: {[book.title for book in books_by_author]}")
 
-# 2. List all books in a library
-library = Library.objects.get(name="Central Library")
-books_in_library = library.books.all()
-print(f"Books in {library.name}: {[book.title for book in books_in_library]}")
-
-# 3. Retrieve the librarian for a library
-librarian = library.librarian
-print(f"Librarian of {library.name}: {librarian.name}")
