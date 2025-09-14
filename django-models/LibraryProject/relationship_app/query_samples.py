@@ -7,6 +7,12 @@ django.setup()
 
 from relationship_app.models import Author, Book, Library, Librarian
 
+from relationship_app.models import Library
+
+library_name = "Central Library"
+library = Library.objects.get(name=library_name)
+print(library)
+
 
 def run_queries():
     # Sample Data Creation
